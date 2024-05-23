@@ -45,17 +45,20 @@ const BookTicket = () => {
 
 
                 <View key={movie.id} style={styles.card}>
-                    <Text style={{ width: 40 }}>{movie.id}</Text>
-                    <Text >{' | '}</Text>
-                    <Text style={{ width: 70 }}>{movie.title}</Text>
-                    <Text >{' | '}</Text>
-                    <Text style={{ width: 50 }} >150mins</Text>
-                    <Text >{' | '}</Text>
-                    <Text style={{ width: 50 }} >1st May 2024</Text>
-                    <Image
-                        source={{ uri: `./img/12a.webp` }}
-                        style={{ width: 20, height: 20 }}
-                    />
+                    <View>
+                        <Text style={[styles.title]}>{movie.title}</Text>
+                    </View>
+                    <View>
+                        <Text>Genre:{movie.genre}</Text>
+                        <Text>Stars:{movie.stars}</Text>
+                        <Text>Director: {movie.director}</Text>
+                        <Text style={{ width: 100 }} >150 mins</Text>
+                        <Text style={{ width: 100 }} >1st May 2024</Text>
+                        <Image
+                            source={{ uri: `./img/12a.webp` }}
+                            style={{ width: 20, height: 20 }}
+                        />
+                    </View>
                 </View>
             </ScrollView>
         )
