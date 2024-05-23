@@ -1,20 +1,93 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { View } from 'react-native';
+import { Provider } from 'react-redux';
+import Movies from './app/components/Movies';
+import BookTicket from './app/components/BookTicket';
+import Ticket from './app/components/Ticket';
+import store from './app/redux/store';
+import { useNavigation } from '@react-navigation/native';
+import { Button } from 'react-native-web';
 
-export default function App() {
+function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Movies navigation={navigation} />
+      </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function BookTicketScreen() {
+
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <BookTicket navigation={navigation} />
+    </View>
+  );
+}
+
+function TicketScreen() {
+
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Ticket navigation={navigation} />
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+
+
+
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Movies" component={HomeScreen}
+            options={{
+              title: 'Movie Page',
+              headerStyle: {
+                backgroundColor: '#f4511e',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }} />
+          <Stack.Screen name="BookTicket" component={BookTicketScreen}
+            options={{
+              title: 'Book Ticket Page',
+              headerStyle: {
+                backgroundColor: '#f4511e',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }} />
+          <Stack.Screen name="Ticket" component={BookTicketScreen}
+            options={{
+              title: 'Ticket Page',
+              headerStyle: {
+                backgroundColor: '#f4511e',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  );
+}
